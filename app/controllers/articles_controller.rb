@@ -1,10 +1,19 @@
 class ArticlesController < ApplicationController
+  # before_action is used to make sure that a spcified method is called - in this case the 'set_article_instance_to_id'
+  # before any other action takes place within the method it is being called in
+  # for example the update method will call set_article_instance_to_id before doing anything else inside the update method
+  before_action :set_article_instance_to_id, only: [:edit, :show, :update, :destroy]
+  # The before_action method takes two parameters
+  # One is the method name, for example - (set_article_instance_to_id)
+  # And the other to specify where it should be used, this is done using the only keyword and then the methods
+
+
   def index
     # Grabs all the articles and stores it in the instance variable @articles so it is usable in the view
     @articles = Article.all
   end
 
-  # The create action is not going to have a template, we need to handle what is being sent in
+  # The create action is not going to have a template, we need to handle what is being sent in and redirect
   def create
     # The form data is being sent in through the params hash
     # This just displays it
@@ -41,18 +50,16 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    # This is a method that was created down in the private block to get rid of redundant code
   end
 
   def show
     # The article path takes in an id (articles/:id)
     # So using the params hash we get the id and find it to display the article
-    @article = Article.find(params[:id])
   end
 
   # the update function is used to edit the articles
   def update
-    @article = Article.find(params[:id])
     # Same logic for checking model validations but instead of 'save' here is 'update'
     # Before in the create action the @article instance variable was already holding the whitelisted form data
     # But here we pass in (article_params) method as an argument so the .update function knows what to update based upon
@@ -67,8 +74,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    # found the article based on the id on the params hash
-    @article = Article.find(params[:id])
     @article.destroy
     flash[:notice] = "Article was successfully deleted"
     redirect_to articles_path
@@ -76,6 +81,13 @@ class ArticlesController < ApplicationController
 
   # private block has to go at the end otherwise the other methods are not visible anymore
   private
+
+    # Method to take care of redundant code
+    def set_article_instance_to_id
+      # found the article based on the id on the params hash
+      @article = Article.find(params[:id])
+    end
+
     # whitelisting method
     def article_params
       # top level key is :article
