@@ -1,3 +1,4 @@
+# This was created by doing rails generate migration create_articles
 class CreateArticles < ActiveRecord::Migration[5.1]
   def change
     # rails db:migrate to create table
