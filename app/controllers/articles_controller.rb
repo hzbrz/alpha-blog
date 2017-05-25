@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   def index
+    # Grabs all the articles and stores it in the instance variable @articles so it is usable in the view
+    @articles = Article.all
   end
 
   # The create action is not going to have a template, we need to handle what is being sent in
@@ -26,8 +28,8 @@ class ArticlesController < ApplicationController
       # The article will be successfully saved INSERTED into the db
       # but it will not go to the next page since the template doesnt exist
     else
-      # if it does hit the validations and get stuck then just refresh the page and render the new action
-      # and create a new article instance variable, but thats not right it doesn't tell the user what went wrong
+      # if it does hit the validations and get stuck then just refresh the page and render the new action and view
+      # and create a new @article instance variable, but thats not right it doesn't tell the user what went wrong
       # We need to display the validations that are keeping my articles from getting saved, we do that in new.html.erb
       render 'new'
     end
@@ -38,10 +40,29 @@ class ArticlesController < ApplicationController
     # rest of this is geting the input with a form in the view template articles/new.html.erb
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
   def show
     # The article path takes in an id (articles/:id)
     # So using the params hash we get the id and find it to display the article
     @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    # Same logic for checking model validations but instead of 'save' here is 'update'
+    # Before in the create action the @article instance variable was already holding the whitelisted form data
+    # But here we pass in (article_params) method as an argument so the .update function knows what to update based upon
+    if @article.update(article_params)
+      flash[:notice] = "Article was successfully updated."
+      # successfully updated then we redirect the user to show page
+      redirect_to article_path(@article)
+    else
+      # if the validation is hit then render the 'edit' action and view again with the error messages on the view.
+      render 'edit'
+    end
   end
 
   # private block has to go at the end otherwise the other methods are not visible anymore
