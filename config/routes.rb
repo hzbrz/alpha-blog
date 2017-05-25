@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'articles/index'
+
   get 'pages/home'
 
   get 'welcome/index'
@@ -15,4 +17,8 @@ Rails.application.routes.draw do
   # root sets the it as the homepage
   # this is saying that: welcome is controller and #index is the action
   root 'welcome#index'
+
+  # Gave us all the RESTful actions for articles.
+  # rails routes in cmd to see the newly added routes for articles
+  resources :articles
 end
