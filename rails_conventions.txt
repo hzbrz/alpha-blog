@@ -1,0 +1,8 @@
+Rails conventions with model names:
+
+model name : Article
+
+Model name -> Singular, First letter Uppercase
+Table name -> Plural, lower case of model name
+Model name filename -> All lower case but singular , article.rb
+Controller name -> plural of model so , articles_controller.rb 
