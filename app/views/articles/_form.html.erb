@@ -1,0 +1,35 @@
+<%-# This is a partial file, partials are identified by the '_' (underscore) in the beginning of the file name. %>
+<%-# Partials are created to take away reduntant code %>
+<%-# the new and edit views are the same so we create a parital to solve that %>
+
+<%-# This code block is for displaying the error if the user fails validations setup in the Article model %>
+<%-# @article.errors.any? checks if there are any errors in the @article instance in the new action%>
+<% if @article.errors.any? %>
+<h2>The following errors prevented the article from getting created.</h2>
+  <%-# The ul (unorederd list) because there are multiple validations and more than one message can show %>
+  <ul>
+    <% @article.errors.full_messages.each do |msg| %>
+        <li> <%= msg %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%- # @article is just an instance variable that has been initiated in the ArticlesController new action %>
+<%= form_for @article do |f| %>
+  <p>
+    <%- # We are working with the title and description attributes %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<p>
+  <%= link_to "Back to articles listing", articles_path %>
+</p>

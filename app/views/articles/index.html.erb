@@ -12,13 +12,16 @@
   <%-# |article| holds each article %>
   <% @articles.each do |article| %>
     <tr>
-      <td><p><%= '-'*article.title.length %></p><%= article.title %></td>
+      <td><p><%= '-'*article.title[1,12].length*3 %></p><%= article.title %></td>
       <td><p><%= '-'*100 %></p><%= article.description %></td>
       <%-# Since the edit and show both take id's in their URIs %>
       <%-# we pass in the argument of 'article' which holds each article %>
       <%-# edit_article_path(article) this is like saying path(id) %>
       <td><%= link_to "Edit", edit_article_path(article) %></td>
       <td><%= link_to "Show", article_path(article) %></td>
+      <%-# The delete looks very similar to the 'link_to show', so we specify its a delete by doing: %>
+      <td><%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are you sure?"}%></td>
+      <%-# Saying that it is responding to the delete method/action in ArticlesController and then a confirm message.%>
     </tr>
   <% end %>
 

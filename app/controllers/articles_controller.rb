@@ -50,19 +50,28 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  # the update function is used to edit the articles
   def update
     @article = Article.find(params[:id])
     # Same logic for checking model validations but instead of 'save' here is 'update'
     # Before in the create action the @article instance variable was already holding the whitelisted form data
     # But here we pass in (article_params) method as an argument so the .update function knows what to update based upon
     if @article.update(article_params)
-      flash[:notice] = "Article was successfully updated."
+      flash[:notice] = "Article was successfully updated"
       # successfully updated then we redirect the user to show page
       redirect_to article_path(@article)
     else
       # if the validation is hit then render the 'edit' action and view again with the error messages on the view.
       render 'edit'
     end
+  end
+
+  def destroy
+    # found the article based on the id on the params hash
+    @article = Article.find(params[:id])
+    @article.destroy
+    flash[:notice] = "Article was successfully deleted"
+    redirect_to articles_path
   end
 
   # private block has to go at the end otherwise the other methods are not visible anymore

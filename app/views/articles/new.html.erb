@@ -1,33 +1,8 @@
 <h1>Create an article!</h1>
 
-<%-# This code block is for displaying the error if the user fails validations setup in the Article model %>
-<%-# @article.errors.any? checks if there are any errors in the @article instance in the new action%>
-<% if @article.errors.any? %>
-<h2>The following errors prevented the article from getting created.</h2>
-  <%-# The ul (unorederd list) because there are multiple validations and more than one message can show %>
-  <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-        <li> <%= msg %> </li>
-    <% end %>
-  </ul>
-<% end %>
+<!-- This is how you call a partial and since it is in the same directory we do not need to
+      specify the folder. For example if it was a in a shared direcoty we would:
+      'render shared/form', Also go to _form.html.erb to see what the partial looks like and how the new view
+      works under the hood. -->
 
-<%- # @article is just an instance variable that has been initiated in the ArticlesController new action %>
-<%= form_for @article do |f| %>
-  <p>
-    <%- # We are working with the title and description attributes %>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<p>
-  <%= link_to "Back to articles listing", articles_path %>
-</p>
+<%= render 'form' %>

@@ -9,13 +9,12 @@
   </head>
 
   <body>
-    <%-# This is the flash message if the article gets saved successfully %>
-    <% flash.each do |name, msg| %>
-      <ul>
-        <li> <%= msg %> </li>
-      </ul>
-    <% end %>
+    <!-- Creating a partial for the flash message because it is good to keep as less code in the application.html.erb
+         as possible, to see how the flash message ruby code go to _messages.html.erb.
 
+         We have to specify the directory because by default it is looking through the articles directory in views.-->
+
+    <%= render 'layouts/messages' %>
     <%= yield %>
   </body>
 </html>
