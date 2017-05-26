@@ -2,17 +2,9 @@
 <%-# Partials are created to take away reduntant code %>
 <%-# the new and edit views are the same so we create a parital to solve that %>
 
-<%-# This code block is for displaying the error if the user fails validations setup in the Article model %>
-<%-# @article.errors.any? checks if there are any errors in the @article instance in the new action%>
-<% if @article.errors.any? %>
-<h2>The following errors prevented the article from getting created.</h2>
-  <%-# The ul (unorederd list) because there are multiple validations and more than one message can show %>
-  <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-        <li> <%= msg %> </li>
-    <% end %>
-  </ul>
-<% end %>
+<!-- The partial for validations exists in shared/_errors.html.erb, go there to check out how it works! -->
+<%-# Looks for the errors partial which checks the validations based on the setup in Article model. %>
+<%= render 'shared/errors', obj: @article %>
 
 <div class="row">
   <div class="col-xs-12">

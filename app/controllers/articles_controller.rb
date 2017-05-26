@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
       # if the article is saved we show a little flash message, but now it has to be displayed somewhere
       # All of the views are wrapped in one view wrapper class: 'application.html.erb' view,
       # so anything put there will show on every page
-      flash[:notice] = "Article was successfully created!"
+      flash[:success] = "Article was successfully created!"
 
       # We are going to redirect to articles#show (/articles/:id, prefix: article)to show article after it creates
       redirect_to article_path(@article)
@@ -64,7 +64,7 @@ class ArticlesController < ApplicationController
     # Before in the create action the @article instance variable was already holding the whitelisted form data
     # But here we pass in (article_params) method as an argument so the .update function knows what to update based upon
     if @article.update(article_params)
-      flash[:notice] = "Article was successfully updated"
+      flash[:success] = "Article was successfully updated"
       # successfully updated then we redirect the user to show page
       redirect_to article_path(@article)
     else
@@ -75,7 +75,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    flash[:notice] = "Article was successfully deleted"
+    flash[:danger] = "Article was successfully deleted"
     redirect_to articles_path
   end
 

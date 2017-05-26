@@ -9,7 +9,8 @@
     <th>Description</th>
   </tr>
 
-  <%-# |article| holds each article, because in the index action of the ArticlesController @articles holds all articles %>
+  <%-# |article| holds each article object %>
+  <%-# because in the index action of the ArticlesController @articles holds all articles %>
   <%-# Python syntax would be like (for article in @articles:...) %>
   <% @articles.each do |article| %>
     <tr>

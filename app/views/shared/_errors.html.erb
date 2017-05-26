@@ -1,0 +1,29 @@
+<%-# This code block is for displaying the error if the user fails validations setup in the Article model %>
+<%-# obj.errors.any? checks if there are any errors in the object instance in the new action%>
+
+<!-- Since we want to make partials as dynamic as possible we have to get rid of @article and replace it with something
+gnereic like obj so that it works for any view and instance. then 'obj' is specified in the render partial-->
+<% if obj.errors.any? %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h2 class="panel-title">
+            <!-- What the pluralize method does: It takes the word in quotes in the method and pluralizes it based on
+            (@article.errors.count) which counts the number of errors... so, one error would be just "error"
+            while multiple errors would be "errors" -->
+            <%= pluralize(obj.errors.count, "error") %>
+            Prohibited this article from being saved:
+          </h2>
+          <div class="panel-body">
+            <ul>
+              <% obj.errors.full_messages.each do |msg| %>
+                  <li> <%= msg %> </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

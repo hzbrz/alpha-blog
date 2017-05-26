@@ -1,6 +1,18 @@
-<%-# This is the flash message if the article gets saved successfully %>
-<% flash.each do |name, msg| %>
-  <ul>
-    <li> <%= msg %> </li>
-  </ul>
-<% end %>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <%-# This is the flash message if the article gets saved successfully %>
+    <% flash.each do |name, msg| %>
+      <%-# the type of message is saved in the 'name' object, so flash[:danger] that 'danger' would be stored in name %>
+      <div class='alert alert-<%="#{name}"%>'>
+        <%-# This gives us a 'x' to close the message %>
+        <a href="#" class="close" data-dismiss="alert">&#215;</a>
+        
+        <!-- https://apidock.com/rails/ActionView/Helpers/TagHelper/content_tag to read up on how (content_tag) works! -->
+        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+        <!-- In simple html that look like this: (<div id="flash_#{whatever_the_name_object_is}">msg</div>)
+        But only (if msg is of type String). content_tag allows us to write the html code in embedded Ruby thus making
+        it dynamic. -->
+      </div>
+    <% end %>
+  </div>
+</div>
