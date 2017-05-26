@@ -85,7 +85,13 @@ class ArticlesController < ApplicationController
     # Method to take care of redundant code
     def set_article_instance_to_id
       # found the article based on the id on the params hash
+      # The 'params' come from the user's browser when they request the page.
+      # For example, if a user's browser requested - http://www.example.com/?foo=1&boo=octopus
+      # then params[:foo] would be "1" and params[:boo] would be "octopus".
+      
       @article = Article.find(params[:id])
+      # here the params[:id] is the is the number in - localhost:3000/article/1
+      # thus allowing us to find or grab each article object
     end
 
     # whitelisting method
@@ -93,7 +99,7 @@ class ArticlesController < ApplicationController
       # top level key is :article
       # and for the key that is :article we are going to permit the values :title and :description
       # So basically from the params hash we are gonna allow these
-      # and with that we are gonna construct a new instance variable - line 13 and then we save it - line 14
+      # and with that we are gonna construct a new instance variable - line 24 and then we save it - line 29
       params.require(:article).permit(:title, :description)
     end
 end

@@ -1,3 +1,68 @@
+/* css styling that apply to an object (for this case the navbar) that is on every page... meaning that it
+   exists as a partial on 'application.html.erb' file, then the styling for it has to be before the @import statements.
+   The styling of its components (for example the navbar-brand) can be done under the @import statements*/
+$navbar-default-bg: #2D2D2D;
+
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+// referring to an id is with '#' and a class is with a '.'
+#logo {
+  float: left;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.center {
+  text-align: center;
+}
+
+// add an image to the homepage
+.jumbotron {
+  background-image: asset-url('rails.jpg');
+  background-size: cover;
+  height: 550px;
+}
+
+.btn-xlarge {
+  font-size: 1.7em;
+  background-color: black;
+}
+
+.btn-xlarge:hover {
+  background-color: #952828;
+}
+
+.footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}

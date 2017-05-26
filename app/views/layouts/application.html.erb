@@ -9,12 +9,24 @@
   </head>
 
   <body>
+    <!-- The partials are rendred according to order: first-navigation bar, second-the flash messages
+         third-the body with the helped 'yield', fourth- the footer -->
+
+    <!-- Looks for the navigation partial -->
+    <%= render 'layouts/navigation' %>
+
     <!-- Creating a partial for the flash message because it is good to keep as less code in the application.html.erb
-         as possible, to see how the flash message ruby code go to _messages.html.erb.
+         as possible, to see how the flash message ruby code go to _messages.html.erb. This is a wrapper file so
+         anything written here shows up on every view, dont believe try putting 'Hello' right after this comment.-->
 
-         We have to specify the directory because by default it is looking through the articles directory in views.-->
-
+    <!-- We have to specify the directory because by default it is looking through the articles directory in views.-->
     <%= render 'layouts/messages' %>
-    <%= yield %>
+    <!-- have to put the yield inside a div tag so that every page that is served is inside a container -->
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <!-- Looks for the footer partial -->
+    <%= render 'layouts/footer' %>
   </body>
 </html>
