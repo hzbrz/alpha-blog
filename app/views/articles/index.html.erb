@@ -21,7 +21,8 @@
       <%-# edit_article_path(article) this is like saying path(id) %>
       <td><%= link_to "Edit", edit_article_path(article) %></td>
       <td><%= link_to "Show", article_path(article) %></td>
-      <%-# The delete looks very similar to the 'link_to show', so we specify its a delete by doing: %>
+      <%-# The delete looks very similar to the 'link_to show' %>
+      <%-# So we specify its a delete by giving it a method called delete, which deletes the article_path(@article) %>
       <td><%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are you sure?"}%></td>
       <%-# Saying that it is responding to the delete method/action in ArticlesController and then a confirm message.%>
     </tr>
