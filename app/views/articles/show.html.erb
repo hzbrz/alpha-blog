@@ -7,7 +7,15 @@
   <%= simple_format(@article.description) %>
   <div class="article-actions">
     <%-# Here the edit_article_path takes in the @article instance variable because it wants to grab this instance object %>
+
+
+    <%-# Since the edit and show both take id's in their URIs %>
+    <%-# we pass in the argument of '@article' which holds each article %>
+    <%-# edit_article_path(@article) this is like saying path(id) %>
     <%= link_to "Edit this article", edit_article_path(@article), class: "btn btn-xs btn-primary" %>
+    
+    <%-# The delete looks very similar to the 'link_to Edit...' %>
+    <%-# So we specify its a delete by giving it a method called delete, which deletes the article_path(@article) %>
     <%= link_to "Delete this article", article_path(@article), method: :delete,
                                        data: { confirm: "Are you sure you wantto delete the article?"},
                                        class: "btn btn-xs btn-danger " %>
