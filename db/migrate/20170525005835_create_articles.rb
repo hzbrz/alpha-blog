@@ -10,6 +10,8 @@ class CreateArticles < ActiveRecord::Migration[5.1]
       # Here we could have done t.timestaps to get the :created_at and :updated_at but we did not
       # So we did it in the next migration using the add_column method
       t.string :title
+      # the reason we can access :title anywhere is because symbols are immutable and they carry the same value
+      # everywhere so ':title' is the same everywhere (just a string column in the database/articles table).
     end
   end
 end
