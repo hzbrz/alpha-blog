@@ -1,5 +1,5 @@
 <%-# Grabs the title instance variable and then shows the attributes %>
-<h2 align="center">Title: <%= @article.title %></h2>
+<h2 align="center">Title: <%= @article.title[0].capitalize + @article.title[1, @article.title.length] %></h2>
 <div class="well col-xs-8 col-xs-offset-2">
   <h4 class="center description"><strong>Description:</strong></h4>
   <hr>
@@ -13,7 +13,7 @@
     <%-# we pass in the argument of '@article' which holds each article %>
     <%-# edit_article_path(@article) this is like saying path(id) %>
     <%= link_to "Edit this article", edit_article_path(@article), class: "btn btn-xs btn-primary" %>
-    
+
     <%-# The delete looks very similar to the 'link_to Edit...' %>
     <%-# So we specify its a delete by giving it a method called delete, which deletes the article_path(@article) %>
     <%= link_to "Delete this article", article_path(@article), method: :delete,
