@@ -22,4 +22,10 @@ Rails.application.routes.draw do
   # Gave us all the RESTful actions for articles.
   # rails routes in cmd to see the newly added routes for articles
   resources :articles
+
+  # We could not do resources :users because we want customized routes, for example we want signup to go to users#new
+  get 'signup', to: 'users#new'
+  # The signup form in the new view needs a post action otherwise it throws an error
+  # post 'users', to: 'users#create' but the efficient way is:
+  resources :users, except: [:new]
 end
