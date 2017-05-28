@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+
+  # Since the User is the 'one' side in the 'one-to-many' associations 'articles' is plural
+  has_many :articles
+
+  # Anytime an email is created for an user I want to save it as lowercase in the db so all the emails are lowercase
+  # This is doable using 'before_save' helper method, it takes the email value and downcases it beofre the user hits db 
+  before_save { self.email = email.downcase }
+
   # Adding user validations:
   #   -  username must be present and unique
   #   -  email must be present and unique

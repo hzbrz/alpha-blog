@@ -23,6 +23,9 @@ class ArticlesController < ApplicationController
     # We cannot just directly pass in what is coming from the params hash, we need to whitelist the values
     @article = Article.new(article_params)
 
+    # Completely hardcoding an user so that we can add articles... bad practice gonna change with authentication
+    @article.user = User.first
+    
     # we were assuming that the article will save and go to the redirected path
     # but what if the attributes don't pass the validations in the model, then what do we show
     # lets take care of that using some conditional logic
