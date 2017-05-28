@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :articles
 
   # Anytime an email is created for an user I want to save it as lowercase in the db so all the emails are lowercase
-  # This is doable using 'before_save' helper method, it takes the email value and downcases it beofre the user hits db 
+  # This is doable using 'before_save' helper method, it takes the email value and downcases it beofre the user hits db
   before_save { self.email = email.downcase }
 
   # Adding user validations:
@@ -24,4 +24,5 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false },
             length: { maximum: 105 },
             format: { with: VALID_EMAIL_REGEX }
+  has_secure_password
 end
