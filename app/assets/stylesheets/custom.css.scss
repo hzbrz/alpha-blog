@@ -42,10 +42,25 @@ $navbar-default-bg: #2D2D2D;
   background-color: #952828;
 }
 
+.article-meta-details {
+  border-top: 1px solid #eaeaea;
+  margin-top: 15px;
+}
+
 .article-actions {
   border-top: 1px solid #eaeaea;
   padding-top: 5px;
+  padding-bottom: 5px;
 }
+
+// .article-design {
+//   border-top: 2px dashed #333333;
+//   border-bottom: 2px dashed #333333;
+// }
+//
+// .article-design p {
+//   margin-top: -7px;
+// }
 
 .description {
   margin-top: 0;

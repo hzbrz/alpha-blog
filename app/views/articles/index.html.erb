@@ -14,6 +14,17 @@
           <!-- We do not want to display the entire article on listing page so we only show upto the 100th character using
           the truncate method. -->
           <%= truncate(article.description, length: 100) %>
+          <div class="article-meta-details">
+            <small>
+              <!-- This is a temporary fix:
+              (if article.user) is added because this will make sure that it will display the articles even if a
+              user is not associated and the username will be displayed only if the user is associated with an article. -->
+              Created by: <%= article.user.username if article.user %>,
+              <!-- time_ago_in_words puts the created_at in a nice format  -->
+              <%= time_ago_in_words(article.created_at) %> ago,
+              last updated: <%= time_ago_in_words(article.updated_at) %> ago
+            </small>
+          </div>
         </div>
         <div class="article-actions">
           <%= link_to "Edit this article", edit_article_path(article), class: "btn btn-xs btn-primary" %>
@@ -21,8 +32,8 @@
                                              data: { confirm: "Are you sure you wantto delete the article?"},
                                              class: "btn btn-xs btn-danger " %>
         </div>
-        <!-- <div class="aritcle-design">
-          <p><%= "-" * 130 %></p>
+        <!-- <div class="article-design">
+          <p></p>
         </div> -->
       </div>
     </div>
