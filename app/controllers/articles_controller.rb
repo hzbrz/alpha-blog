@@ -56,6 +56,9 @@ class ArticlesController < ApplicationController
   def show
     # The article path takes in an id (articles/:id)
     # So using the params hash we get the id and find it to display the article
+    # The 'params' come from the user's browser when they request the page.
+    # For example, if a user's browser requested - http://www.example.com/?foo=1&boo=octopus
+    # then params[:foo] would be "1" and params[:boo] would be "octopus".
   end
 
   # the update function is used to edit the articles
@@ -85,9 +88,6 @@ class ArticlesController < ApplicationController
     # Method to take care of redundant code
     def set_article_instance_to_id
       # found the article based on the id on the params hash
-      # The 'params' come from the user's browser when they request the page.
-      # For example, if a user's browser requested - http://www.example.com/?foo=1&boo=octopus
-      # then params[:foo] would be "1" and params[:boo] would be "octopus".
 
       @article = Article.find(params[:id])
       # here the params[:id] is the is the number in - localhost:3000/article/1
