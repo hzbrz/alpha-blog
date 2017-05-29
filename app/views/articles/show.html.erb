@@ -1,13 +1,32 @@
 <%-# Grabs the title instance variable and then shows the attributes %>
 <h2 align="center">Title: <%= @article.title[0].capitalize + @article.title[1, @article.title.length] %></h2>
 <div class="well col-xs-8 col-xs-offset-2">
+<!-- If the article has an User associated with it then show this block else just show the description block after it -->
+  <% if @article.user %>
+    <ul class="listing">
+      <div class="row center">
+        <div class="col-md-4 col-md-offset-4">
+          <li>Created by:</li>
+          <li><%= link_to gravatar_for(@article.user), user_path(@article.user) %></li>
+          <li class="article-title">
+            <%= link_to @article.user.username, user_path(@article.user) %>
+          </li>
+          <li>
+            <small>
+              <!-- 'if @article.user.articles' checks if the user has any articles? -->
+              <%= pluralize(@article.user.articles.count, "article") if @article.user.articles %>
+            </small>
+          </li>
+        </div>
+      </div>
+    </ul>
+  <% end %>
   <h4 class="center description"><strong>Description:</strong></h4>
   <hr>
   <%-# What simple_format() does is that it uses the exact format the article description was written in %>
   <%= simple_format(@article.description) %>
   <div class="article-actions">
-    <%-# Here the edit_article_path takes in the @article instance variable because it wants to grab this instance object %>
-
+  <%-# Here the edit_article_path takes in the @article instance variable because it wants to grab this instance object %>
 
     <%-# Since the edit and show both take id's in their URIs %>
     <%-# we pass in the argument of '@article' which holds each article %>

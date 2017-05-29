@@ -1,0 +1,39 @@
+<%-# |article| holds each article object %>
+<%-# because in the index action of the ArticlesController @articles holds all articles %>
+<%-# Python syntax would be like (for article in @articles:...) %>
+<% obj.each do |object| %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="article-title">
+          <%= link_to object.title[0].capitalize + object.title[1, object.title.length], article_path(object) %>
+        </div>
+        <div class="article-body">
+          <!-- We do not want to display the entire article on listing page so we only show upto the 100th character using
+          the truncate method. -->
+          <%= truncate(object.description, length: 100) %>
+          <div class="article-meta-details">
+            <small>
+              <!-- This is a temporary fix:
+              (if article.user) is added because this will make sure that it will display the articles even if a
+              user is not associated and the username will be displayed only if the user is associated with an article. -->
+              Created by: <%= object.user.username if object.user %>,
+              <!-- time_ago_in_words puts the created_at in a nice format  -->
+              <%= time_ago_in_words(object.created_at) %> ago,
+              last updated: <%= time_ago_in_words(object.updated_at) %> ago
+            </small>
+          </div>
+        </div>
+        <div class="article-actions">
+          <%= link_to "Edit this article", edit_article_path(object), class: "btn btn-xs btn-primary" %>
+          <%= link_to "Delete this article", article_path(object), method: :delete,
+                                             data: { confirm: "Are you sure you wantto delete the article?"},
+                                             class: "btn btn-xs btn-danger " %>
+        </div>
+        <!-- <div class="article-design">
+          <p></p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+<% end %>
