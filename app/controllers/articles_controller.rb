@@ -9,8 +9,8 @@ class ArticlesController < ApplicationController
 
 
   def index
-    # Grabs all the articles and stores it in the instance variable @articles so it is usable in the view
-    @articles = Article.all
+    # Adds pagination using the will_paginate gem: https://github.com/mislav/will_paginate
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   # The create action is not going to have a template, we need to handle what is being sent in and redirect
@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
 
     # Completely hardcoding an user so that we can add articles... bad practice gonna change with authentication
     @article.user = User.first
-    
+
     # we were assuming that the article will save and go to the redirected path
     # but what if the attributes don't pass the validations in the model, then what do we show
     # lets take care of that using some conditional logic

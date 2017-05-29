@@ -1,5 +1,11 @@
 <h1 align="center">Listing Articles</h1>
 
+<!-- This adds the pagination bar to the page -->
+<div align="center">
+  <%= will_paginate %>
+</div>
 <!-- Looks for article partial, go to: _article.html.erb to see how Listing articles works under the hood! -->
-
 <%= render 'article', obj: @articles %>
+<div align="center">
+  <%= will_paginate %>
+</div>
