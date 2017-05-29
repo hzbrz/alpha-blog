@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
             length: { minimum: 3, maximum: 25 }
 
   # formats the email based on the regex in VALID_EMAIL_REGEX
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true,
             uniqueness: { case_sensitive: false },
             length: { maximum: 105 },

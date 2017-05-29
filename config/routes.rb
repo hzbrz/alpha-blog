@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   # We could not do resources :users because we want customized routes, for example we want signup to go to users#new
   get 'signup', to: 'users#new'
   # The signup form in the new view needs a post action otherwise it throws an error
-  # post 'users', to: 'users#create' but the efficient way is:
-  resources :users, except: [:new]
+  # post 'users', to: 'users#create' works...but the efficient way is:
+  resources :users, except: [:new] # This creates all the RESTful routes for the User object except for the custom route
 end

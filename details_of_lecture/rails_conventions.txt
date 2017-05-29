@@ -6,10 +6,3 @@ Model name -> Singular, First letter Uppercase
 Table name -> Plural, lower case of model name
 Model name filename -> All lower case but singular , article.rb
 Controller name -> plural of model so , articles_controller.rb
-
-Repition styling
-<td><p><%= '-'*article.title[1,12].length*3 %></p><%= article.title %></td>
-<td><p><%= '-'*100 %></p><%= article.description %></td>
-<td><p><%= '-'*9 %></p><%= link_to "Edit", edit_article_path(article) %></td>
-<td><p><%= '-'*9 %></p><%= link_to "Show", article_path(article) %></td>
-<td><p><%= '-'*9 %></p><%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Are you sure?"}%></td>
