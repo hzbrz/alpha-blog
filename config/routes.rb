@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
-  # get 'articles/index'
-  #
-  # get 'pages/home'
-  #
-  # get 'welcome/index'
-  #
-  # # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  #
-  # # localhost:3000/welcome/index is the URI pattern
-  # get 'welcome/index'
+  # The priority is based on the order of creation: first created -> highest priority
 
   # this is saying that: pages is controller and #home is the action
   get 'pages/home', to: 'pages#home'
@@ -28,4 +19,8 @@ Rails.application.routes.draw do
   # The signup form in the new view needs a post action otherwise it throws an error
   # post 'users', to: 'users#create' works...but the efficient way is:
   resources :users, except: [:new] # This creates all the RESTful routes for the User object except for the custom route
+
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 end
