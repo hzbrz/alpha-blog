@@ -15,7 +15,7 @@
           <div class="article-meta-details">
             <small>
               <!-- This is a temporary fix:
-              (if article.user) is added because this will make sure that it will display the articles even if a
+              (if object.user) is added because this will make sure that something display the articles even if a
               user is not associated and the username will be displayed only if the user is associated with an article. -->
               Created by: <%= object.user.username if object.user %>,
               <!-- time_ago_in_words puts the created_at in a nice format  -->
@@ -24,15 +24,15 @@
             </small>
           </div>
         </div>
-        <div class="article-actions">
-          <%= link_to "Edit this article", edit_article_path(object), class: "btn btn-xs btn-primary" %>
-          <%= link_to "Delete this article", article_path(object), method: :delete,
-                                             data: { confirm: "Are you sure you wantto delete the article?"},
-                                             class: "btn btn-xs btn-danger " %>
-        </div>
-        <!-- <div class="article-design">
-          <p></p>
-        </div> -->
+        <!-- We want these actions to be restricted if a user is not logged in
+             and the articles are not created by that user -->
+        <% if logged_in? && current_user == object.user %>
+          <div class="article-actions">
+            <%= link_to "Edit this article", edit_article_path(object), class: "btn btn-xs btn-primary" %>
+            <%= link_to "Delete this article", article_path(object), method: :delete,
+                                               data: { confirm: "Are you sure you wantto delete the article?"},
+                                               class: "btn btn-xs btn-danger " %></div>
+         <% end %>
       </div>
     </div>
   </div>

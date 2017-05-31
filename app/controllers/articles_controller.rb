@@ -7,6 +7,14 @@ class ArticlesController < ApplicationController
   # One is the method name, for example - (set_article_instance_to_id)
   # And the other to specify where it should be used, this is done using the only keyword and then the methods
 
+  # Apply before_action to the methods except these one, that is what the except array does
+  # We are putting this require_user method on every other method except for the ones listed below to make sure...
+  # that no one can mess with anything if they are logged in
+  before_action :require_user, except: [:index, :show]
+
+  # method defined on line 118 check to see how it (require_same_user) works
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+
 
   def index
     # Adds pagination using the will_paginate gem: https://github.com/mislav/will_paginate
@@ -23,8 +31,13 @@ class ArticlesController < ApplicationController
     # We cannot just directly pass in what is coming from the params hash, we need to whitelist the values
     @article = Article.new(article_params)
 
-    # Completely hardcoding an user so that we can add articles... bad practice gonna change with authentication
-    @article.user = User.first
+    # When the form is submitted and an article is about to created it sets that article to the last User so it has an
+    # User associated with it, otherwise it throws a validation error setup in the Article model that requires each article
+    # to have an User associated with it . So this is a hard coded and a temporary fix that will be taken out after auth
+    # @article.user = User.last
+
+    # This is the right way after authentication has been added, go to ApplicationController to see how current_user works
+    @artucle.user = current_user
 
     # we were assuming that the article will save and go to the redirected path
     # but what if the attributes don't pass the validations in the model, then what do we show
@@ -104,5 +117,12 @@ class ArticlesController < ApplicationController
       # So basically from the params hash we are gonna allow these
       # and with that we are gonna construct a new instance variable - line 24 and then we save it - line 29
       params.require(:article).permit(:title, :description)
+    end
+
+    def require_same_user
+      if current_user != @article.user
+        flash[:danger] = "You can only edit or delete your own articles"
+        redirect_to root_path
+      end
     end
 end
