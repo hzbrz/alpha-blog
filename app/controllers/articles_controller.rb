@@ -37,7 +37,7 @@ class ArticlesController < ApplicationController
     # @article.user = User.last
 
     # This is the right way after authentication has been added, go to ApplicationController to see how current_user works
-    @artucle.user = current_user
+    @article.user = current_user
 
     # we were assuming that the article will save and go to the redirected path
     # but what if the attributes don't pass the validations in the model, then what do we show
