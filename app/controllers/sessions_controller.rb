@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
 
   # handle the submission of the login form
   def create
+    debugger
     # since it is not an instance variable we do not have to put @ in front of user
     # params hash has the session hash which has the email and password values
     user = User.find_by(email: params[:session][:email].downcase)
